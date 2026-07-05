@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مولد تصاميم منتجات إثراؤك</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+
+    :root {
+      color-scheme: light;
+      --bg: #f5fbfb;
+      --surface: #ffffff;
+      --surface-soft: #eefafa;
+      --surface-strong: #dff4f2;
+      --text: #14313a;
+      --muted: #62777f;
+      --line: #d8ebea;
+      --line-strong: #bfdcda;
+      --primary: #16c8c8;
+      --primary-dark: #0c6f73;
+      --gold: #d7a743;
+      --danger: #c2414b;
+      --warn: #b7791f;
+      --shadow: 0 18px 42px rgba(20, 49, 58, .10);
+      --focus: 0 0 0 4px rgba(23, 184, 179, .18);
+      --radius: 8px;
+      --font: "Tajawal", "Segoe UI", Tahoma, Arial, sans-serif;
+    }
+
+    body.dark {
+      color-scheme: dark;
+      --bg: #101820;
+      --surface: #16232b;
+      --surface-soft: #1d2d35;
+      --surface-strong: #263b43;
+      --text: #edfafa;
+      --muted: #a9bdc3;
+      --line: #2b454d;
+      --line-strong: #3b5963;
+      --primary-dark: var(--primary);
+      --shadow: 0 18px 46px rgba(0, 0, 0, .30);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font);
+      background:
+        linear-gradient(135deg, rgba(23, 184, 179, .14), transparent 34%),
+        linear-gradient(225deg, rgba(245, 184, 46, .16), transparent 30%),
+        linear-gradient(90deg, rgba(20, 49, 58, .035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(20, 49, 58, .035) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, auto, 48px 48px, 48px 48px, auto;
+      color: var(--text);
+      line-height: 1.75;
+      transition: background-color .25s ease, color .25s ease;
+    }
+
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    a { color: var(--primary-dark); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      width: min(1200px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 26px 0 34px;
+    }
+
+    .hero, .panel {
+      background: color-mix(in srgb, var(--surface) 94%, transparent);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 24px;
+      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      border-top: 5px solid var(--primary);
+    }
+
+    h1, h2, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 8px;
+      font-size: clamp(24px, 3vw, 40px);
+      line-height: 1.3;
+      color: var(--primary-dark);
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      margin-bottom: 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .hero-tools {
+      display: grid;
+      gap: 10px;
+      min-width: 190px;
+    }
+
+    .brand-badge, .theme-btn {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      text-align: center;
+      color: var(--primary-dark);
+      background: var(--surface-soft);
+      font-weight: 800;
+    }
+
+    .theme-btn {
+      color: var(--text);
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .theme-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--primary);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 400px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .panel h2 {
+      font-size: 18px;
+      margin-bottom: 14px;
+      color: var(--primary-dark);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 800;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      padding: 11px 12px;
+      outline: none;
+      transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: var(--focus);
+    }
+
+    input.is-invalid {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger) 14%, transparent);
+    }
+
+    textarea {
+      min-height: 560px;
+      resize: vertical;
+      direction: rtl;
+      white-space: pre-wrap;
+      line-height: 1.85;
+    }
+
+    .section-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .section-btn {
+      display: grid;
+      grid-template-columns: 26px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      text-align: right;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .section-btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--primary);
+    }
+
+    .section-btn.active {
+      border-color: var(--primary);
+      background: var(--surface-soft);
+    }
+
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px rgba(20, 49, 58, .18);
+    }
+
+    .code {
+      direction: ltr;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      border: 1px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 11px 14px;
+      color: #fff;
+      background: var(--primary);
+      font-weight: 800;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: var(--primary-dark);
+    }
+
+    .btn.secondary {
+      background: var(--surface);
+      color: var(--primary-dark);
+      border-color: var(--line-strong);
+    }
+
+    .btn.secondary:hover {
+      border-color: var(--primary);
+      background: var(--surface-soft);
+    }
+
+    .btn.danger {
+      color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 8%, var(--surface));
+      border-color: color-mix(in srgb, var(--danger) 35%, var(--line));
+    }
+
+    .hint, .health {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .health {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-soft);
+    }
+
+    .health.good {
+      color: #0f766e;
+      border-color: color-mix(in srgb, #0f766e 35%, var(--line));
+      background: color-mix(in srgb, #0f766e 10%, var(--surface));
+      font-weight: 800;
+    }
+
+    .health.warn {
+      color: var(--warn);
+      border-color: color-mix(in srgb, var(--warn) 35%, var(--line));
+      background: color-mix(in srgb, var(--warn) 10%, var(--surface));
+      font-weight: 800;
+    }
+
+    .preview, .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .preview {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .preview-box, .stat {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: var(--surface-soft);
+    }
+
+    .preview-box strong, .stat strong {
+      display: block;
+      color: var(--primary-dark);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      z-index: 20;
+      max-width: min(560px, calc(100% - 28px));
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      color: #fff;
+      background: #0f766e;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, .20);
+      font-weight: 800;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 24px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .toast.error { background: #b91c1c; }
+
+    footer {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.8;
+      font-size: 13px;
+    }
+
+    footer strong { color: var(--text); }
+    footer a { color: #1d4ed8; font-weight: 800; }
+
+    @media (max-width: 980px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+      .hero-tools { min-width: 0; }
+      textarea { min-height: 470px; }
+    }
+
+    @media (max-width: 620px) {
+      .page { width: min(100% - 20px, 1200px); padding-top: 14px; }
+      .hero, .panel { padding: 14px; }
+      .actions, .preview, .stats { grid-template-columns: 1fr; }
+      .section-btn { grid-template-columns: 24px 1fr; }
+      .section-btn .code { grid-column: 2; }
+      textarea { min-height: 380px; font-size: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <h1>مولد تصاميم منتجات إثراؤك</h1>
+        <p>اختر القسم واللون وطريقة التعامل مع الصور، ثم انسخ برومبتاً جاهزاً لتحويل صورة واحدة أو عدة صور إلى غلاف كتاب ثلاثي الأبعاد بهوية متجر إثراؤك.</p>
+      </div>
+      <div class="hero-tools">
+        <div class="brand-badge">إثراؤك | ithraok</div>
+        <button class="theme-btn" id="themeToggle" type="button">الوضع الليلي</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <aside class="panel">
+        <h2>إعدادات البرومبت</h2>
+
+        <div class="field">
+          <label for="sectionName">اسم القسم</label>
+          <input id="sectionName" value="المهارات الرقمية">
+        </div>
+
+        <div class="field">
+          <label for="sectionColor">لون القسم الأساسي المضيء</label>
+          <input id="sectionColor" value="#16C8C8" dir="ltr" inputmode="text">
+        </div>
+
+        <div class="field">
+          <label for="supportColor">اللون الداعم الداكن</label>
+          <input id="supportColor" value="#006F73" dir="ltr" inputmode="text">
+        </div>
+
+        <div class="field">
+          <label for="imageMode">طريقة التعامل مع الصور</label>
+          <select id="imageMode">
+            <option value="auto">تلقائي: صورة واحدة غلاف كامل، عدة صور شبكة منظمة</option>
+            <option value="single">صورة واحدة فقط كغلاف كامل</option>
+            <option value="multi">عدة صور داخل لوحة واحدة منظمة</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="qualityLevel">مستوى الدقة</label>
+          <select id="qualityLevel">
+            <option value="balanced">متوازن ومناسب للاستخدام العام</option>
+            <option value="strict">صارم جداً للحفاظ على الصور والنصوص</option>
+            <option value="premium">فاخر وإعلاني بجودة عالية</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="extraNotes">ملاحظات اختيارية</label>
+          <input id="extraNotes" placeholder="مثال: اجعل الشبكة 3 × 2 إن أمكن">
+        </div>
+
+        <div class="field">
+          <label>ألوان الأقسام المقترحة</label>
+          <div class="section-list" id="sectionList"></div>
+        </div>
+
+        <div class="preview">
+          <div class="preview-box">
+            <strong>القسم الحالي</strong>
+            <span id="previewName">المهارات الرقمية</span>
+          </div>
+          <div class="preview-box">
+            <strong>اللون الحالي</strong>
+            <span id="previewColor" dir="ltr">#16C8C8</span>
+          </div>
+          <div class="preview-box">
+            <strong>اللون الداعم</strong>
+            <span id="previewSupportColor" dir="ltr">#006F73</span>
+          </div>
+        </div>
+
+        <div class="health" id="promptHealth" aria-live="polite"></div>
+      </aside>
+
+      <section class="panel">
+        <h2>البرومبت الجاهز</h2>
+        <textarea id="promptOutput" readonly></textarea>
+        <div class="stats">
+          <div class="stat"><strong id="charCount">0</strong><span>حرف</span></div>
+          <div class="stat"><strong id="wordCount">0</strong><span>كلمة تقريباً</span></div>
+        </div>
+        <div class="actions">
+          <button class="btn" id="copyBtn" type="button">نسخ البرومبت</button>
+          <button class="btn secondary" id="downloadBtn" type="button">تحميل TXT</button>
+          <button class="btn danger" id="resetBtn" type="button">إعادة الضبط</button>
+        </div>
+        <p class="hint" id="status">ارفع الصور في أداة التصميم، ثم الصق البرومبت الناتج.</p>
+      </section>
+    </section>
+
+    <footer>
+      <strong>برمجة: عبدالله بن رشيد الدريبي</strong><br>
+      محتوى تقني وتعليمي | مبادرات وتجارب رقمية<br>
+      منصة إكس: <a href="https://x.com/AbuRasheed12" target="_blank" rel="noopener noreferrer" dir="ltr">@AbuRasheed12</a>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    "use strict";
+
+    const STORE_KEY = "bookPromptGenerator.settings.v3";
+    const THEME_KEY = "bookPromptGenerator.theme";
+    const sections = [
+      { name: "المهارات الرقمية", color: "#16C8C8", support: "#006F73" },
+      { name: "الذكاء الاصطناعي", color: "#8B6CFF", support: "#382973" },
+      { name: "التعليم الرقمي", color: "#48B7F2", support: "#0D4B8F" },
+      { name: "التصاميم التعليمية", color: "#E56CA4", support: "#7A2559" },
+      { name: "البرمجة والأدوات المخصصة", color: "#4197FF", support: "#102E6E" },
+      { name: "الخدمات والطلبات المخصصة", color: "#D7A743", support: "#6E4C1F" },
+      { name: "إهداءات إثراؤك المجانية", color: "#63D8A9", support: "#17634D" }
+    ];
+
+    const $ = (id) => document.getElementById(id);
+    const sectionName = $("sectionName");
+    const sectionColor = $("sectionColor");
+    const supportColor = $("supportColor");
+    const imageMode = $("imageMode");
+    const qualityLevel = $("qualityLevel");
+    const extraNotes = $("extraNotes");
+    const promptOutput = $("promptOutput");
+    const sectionList = $("sectionList");
+    const previewName = $("previewName");
+    const previewColor = $("previewColor");
+    const previewSupportColor = $("previewSupportColor");
+    const status = $("status");
+    const promptHealth = $("promptHealth");
+
+    function init() {
+      restoreTheme();
+      restoreSettings();
+      renderSections();
+      bindEvents();
+      update();
+    }
+
+    function bindEvents() {
+      [sectionName, sectionColor, supportColor, imageMode, qualityLevel, extraNotes].forEach((element) => {
+        element.addEventListener("input", saveAndUpdate);
+        element.addEventListener("change", saveAndUpdate);
+      });
+      $("copyBtn").addEventListener("click", copyPrompt);
+      $("downloadBtn").addEventListener("click", downloadPrompt);
+      $("resetBtn").addEventListener("click", resetForm);
+      $("themeToggle").addEventListener("click", toggleTheme);
+    }
+
+    function restoreTheme() {
+      if (localStorage.getItem(THEME_KEY) === "dark") document.body.classList.add("dark");
+      updateThemeButton();
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem(THEME_KEY, document.body.classList.contains("dark") ? "dark" : "light");
+      updateThemeButton();
+    }
+
+    function updateThemeButton() {
+      $("themeToggle").textContent = document.body.classList.contains("dark") ? "الوضع الفاتح" : "الوضع الليلي";
+    }
+
+    function collectSettings() {
+      return {
+        sectionName: sectionName.value,
+        sectionColor: sectionColor.value,
+        supportColor: supportColor.value,
+        imageMode: imageMode.value,
+        qualityLevel: qualityLevel.value,
+        extraNotes: extraNotes.value
+      };
+    }
+
+    function restoreSettings() {
+      const saved = localStorage.getItem(STORE_KEY);
+      if (!saved) return;
+      try {
+        const data = JSON.parse(saved);
+        if (typeof data.sectionName === "string") sectionName.value = data.sectionName;
+        if (typeof data.sectionColor === "string") sectionColor.value = data.sectionColor;
+        if (typeof data.supportColor === "string") supportColor.value = data.supportColor;
+        if (typeof data.imageMode === "string") imageMode.value = data.imageMode;
+        if (typeof data.qualityLevel === "string") qualityLevel.value = data.qualityLevel;
+        if (typeof data.extraNotes === "string") extraNotes.value = data.extraNotes;
+      } catch (error) {
+        localStorage.removeItem(STORE_KEY);
+      }
+    }
+
+    function saveAndUpdate() {
+      localStorage.setItem(STORE_KEY, JSON.stringify(collectSettings()));
+      update();
+    }
+
+    function normalizeColor(color) {
+      const trimmed = color.trim();
+      if (/^#[0-9a-fA-F]{6}$/.test(trimmed)) return trimmed.toUpperCase();
+      return trimmed;
+    }
+
+    function validateInputs(showMessage = false) {
+      const warnings = [];
+      sectionName.classList.remove("is-invalid");
+      sectionColor.classList.remove("is-invalid");
+      supportColor.classList.remove("is-invalid");
+
+      if (!sectionName.value.trim()) {
+        warnings.push("اكتب اسم القسم حتى يظهر البرومبت بدقة.");
+        sectionName.classList.add("is-invalid");
+      }
+
+      if (!/^#[0-9a-fA-F]{6}$/.test(sectionColor.value.trim())) {
+        warnings.push("يفضل استخدام لون أساسي بصيغة صحيحة مثل #16C8C8.");
+        sectionColor.classList.add("is-invalid");
+      }
+
+      if (!/^#[0-9a-fA-F]{6}$/.test(supportColor.value.trim())) {
+        warnings.push("يفضل استخدام لون داعم بصيغة صحيحة مثل #006F73.");
+        supportColor.classList.add("is-invalid");
+      }
+
+      if (showMessage && warnings.length) showToast(warnings[0], true);
+      return warnings;
+    }
+
+    function imageInstructions(mode) {
+      if (mode === "single") {
+        return `الصور المرفقة:
+- استخدم الصورة المرفقة كغلاف أمامي كامل للكتاب.
+- حافظ على وضوح الصورة وعدم قص النصوص أو العناصر المهمة.
+- لا تشوه أبعاد الصورة، ولا تمددها بشكل غير طبيعي.
+- لا تغير محتوى الصورة المرفقة، ولا تعدل النصوص أو العناصر الموجودة داخلها.
+- اجعل الصورة داخل حدود الغلاف الأمامي فقط، مع مراعاة منظور الكتاب ثلاثي الأبعاد.`;
+      }
+
+      if (mode === "multi") {
+        return `الصور المرفقة:
+- استخدم جميع الصور المرفقة في التصميم.
+- اجمع الصور داخل لوحة واحدة منظمة ومتناسقة، ثم اجعل هذه اللوحة هي الغلاف الأمامي للكتاب.
+- رتب الصور داخل شبكة نظيفة حسب عدد الصور وشكلها، مع اختيار التخطيط الأنسب تلقائياً.
+- حافظ على وضوح كل صورة وعدم قص النصوص أو العناصر المهمة.
+- لا تشوه أبعاد الصور، ولا تمددها بشكل غير طبيعي.
+- اجعل بين الصور مسافات بيضاء بسيطة ومنتظمة.
+- ضع لكل صورة إطاراً رفيعاً ناعماً أو ظلاً خفيفاً حتى تظهر مرتبة.
+- يجب أن تبقى جميع الصور داخل حدود الغلاف الأمامي للكتاب بدون تداخل أو خروج عن الإطار.
+- لا تغير محتوى الصور المرفقة، ولا تعدل النصوص أو العناصر الموجودة داخلها.`;
+      }
+
+      return `الصور المرفقة:
+- استخدم جميع الصور المرفقة في التصميم.
+- إذا كانت صورة واحدة فقط، اجعلها غلافاً أمامياً كاملاً للكتاب.
+- إذا كانت أكثر من صورة، اجمعها داخل لوحة واحدة منظمة ومتناسقة، ثم اجعل هذه اللوحة هي الغلاف الأمامي للكتاب.
+- رتب الصور داخل شبكة نظيفة حسب عدد الصور وشكلها، مع اختيار التخطيط الأنسب تلقائياً.
+- حافظ على وضوح كل صورة وعدم قص النصوص أو العناصر المهمة.
+- لا تشوه أبعاد الصور، ولا تمددها بشكل غير طبيعي.
+- اجعل بين الصور مسافات بيضاء بسيطة ومنتظمة عند وجود أكثر من صورة.
+- ضع لكل صورة إطاراً رفيعاً ناعماً أو ظلاً خفيفاً حتى تظهر مرتبة عند وجود أكثر من صورة.
+- يجب أن تبقى جميع الصور داخل حدود الغلاف الأمامي للكتاب بدون تداخل أو خروج عن الإطار.
+- لا تغير محتوى الصور المرفقة، ولا تعدل النصوص أو العناصر الموجودة داخلها.`;
+    }
+
+    function qualityInstructions(level) {
+      if (level === "strict") {
+        return `ضوابط صارمة:
+- الأولوية القصوى للحفاظ على محتوى الصور المرفقة كما هو.
+- لا تقص النصوص أو الشعارات أو العناصر المهمة داخل الصور.
+- لا تضف عناوين أو عبارات فوق الصور المرفقة.
+- عند وجود عدة صور، اجعلها واضحة ومنفصلة داخل شبكة مرتبة.`;
+      }
+      if (level === "premium") {
+        return `مستوى الإخراج:
+- اجعل النتيجة فاخرة وإعلانية، مناسبة لعرض منتج رقمي في متجر احترافي.
+- استخدم إضاءة ناعمة وواقعية، وملمساً أبيض نظيفاً، وظلالاً مدروسة.
+- أظهر الكتاب ثلاثي الأبعاد بعمق واضح دون مبالغة أو ازدحام بصري.`;
+      }
+      return `مستوى الإخراج:
+- اجعل النتيجة متوازنة بين الفخامة والوضوح.
+- حافظ على بساطة التصميم وسهولة قراءة الصور داخل الغلاف.
+- اجعل القالب مناسباً للمتجر ووسائل التواصل.`;
+    }
+
+    function buildPrompt() {
+      const name = sectionName.value.trim() || "[اكتب اسم القسم هنا]";
+      const color = normalizeColor(sectionColor.value) || "[اكتب كود اللون هنا]";
+      const support = normalizeColor(supportColor.value) || "[اكتب كود اللون الداعم هنا]";
+      const notes = extraNotes.value.trim();
+      const notesBlock = notes ? `\nملاحظات إضافية:\n- ${notes}\n` : "";
+
+      return `صمم قالب عرض احترافي لصورة منتج رقمي على شكل كتاب ثلاثي الأبعاد.
+
+اسم القسم:
+${name}
+
+قواعد غير قابلة للتفاوض:
+1. الشعار العلوي ثابت وموحد في كل الأقسام كأنه أصل بصري جاهز وليس نصاً يعاد تصميمه: لمبة أفكار خطية + كلمة "إثراؤك" + كلمة "ithraok" واضحة تحتها، بلون متوافق مع لون القسم.
+2. لا تغيّر شكل الشعار أو خطه أو حجم خطه أو ترتيب عناصره، ولا تستبدل اللمبة بأي رمز آخر.
+3. اسم القسم يظهر مرة واحدة فقط، ومكانه الوحيد داخل إطار القسم تحت الشعار مباشرة، وبنفس خط ووزن وحجم النموذج المرجعي في كل الأقسام.
+4. لا تكرر اسم القسم على الكعب أو الغلاف أو الإطار الخارجي أو أي مكان آخر.
+5. كعب الكتاب بلا نص وبلا رمز وبلا شعار: لون + تدرج + لمعة + فاصل فقط.
+6. شريط "منتج رقمي" ثابت الحجم والشكل في أعلى اليسار، ويتغير لونه فقط.
+7. إطار اسم القسم ثابت الشكل والحجم ونوع الخط ووزن الخط في كل الأقسام، ويتغير اللون فقط.
+8. إذا تعارضت أي تفاصيل جمالية مع هذه القواعد، قدّم هذه القواعد أولاً.
+
+لون القسم الأساسي المضيء:
+${color}
+
+اللون الداعم الداكن:
+${support}
+
+${imageInstructions(imageMode.value)}
+
+${qualityInstructions(qualityLevel.value)}
+${notesBlock}
+مواصفات القالب:
+- الكتاب في منتصف التصميم بزاوية مائلة خفيفة، يظهر الغلاف الأمامي بوضوح وكعب الكتاب من الجهة اليسرى.
+- اجعل الغلاف الأمامي هو العنصر المسيطر بصرياً بنسبة 88% إلى 92% من عرض الكتاب.
+- اجعل كعب الكتاب ضيقاً وطبيعياً بنسبة 8% إلى 12% فقط من عرض الكتاب، ولا تجعله عريضاً أو مسيطراً.
+- استخدم اللون الأساسي المضيء ${color} في الإطار الخارجي، الشريط الجانبي، الأيقونات السفلية، والخطوط التزيينية الظاهرة.
+- استخدم اللون الداعم الداكن ${support} في كعب الكتاب، الظلال اللونية الخفيفة، الحواف الداخلية، والتفاصيل الثانوية فقط.
+- لا تجعل اللون الداعم الداكن مسيطراً على التصميم، بل اجعله للتوازن والعمق.
+- كعب الكتاب يكون شريطاً جانبياً ضيقاً باللون الداعم الداكن: ${support}.
+- اجعل الكعب يحتوي على تدرج لوني خفيف من الداكن إلى الأفتح قليلاً ليوحي بانحناءة الكتاب.
+- أضف لمعة طولية ناعمة ورفيعة على الكعب، وليست قوية أو مشتتة.
+- أضف خطاً فاصلاً فاتحاً رفيعاً بين الكعب والغلاف الأمامي.
+- لا تكتب أي نص على كعب الكتاب نهائياً.
+- لا تكتب اسم القسم على كعب الكتاب.
+- لا تكتب "إثراؤك" ولا "ithraok" على كعب الكتاب.
+- لا تضع أي رمز أو شعار أو أيقونة على كعب الكتاب نهائياً.
+- الكعب عنصر بصري فقط: لون + تدرج + لمعة + فاصل.
+- إطار التصميم الخارجي يكون باللون الأساسي المضيء: ${color}.
+- الشريط الجانبي العلوي "منتج رقمي" يكون ثابت الشكل والحجم في جميع الأقسام، ويطابق مقاس النموذج الأخضر الهادئ تماماً: شريط عمودي ضيق ومتدلٍّ في أعلى يسار التصميم، برأس مستقيم ونهاية مثلثة على شكل راية.
+- لا تكبّر شريط "منتج رقمي" ولا تجعله عريضاً أو طويلاً من قسم لآخر؛ المتغير الوحيد هو اللون حسب القسم.
+- اجعل عرض الشريط تقريباً 7% إلى 9% من عرض التصميم، وارتفاعه تقريباً 17% إلى 21% من ارتفاع التصميم، مع ثبات التناسب في كل الأقسام.
+- الشريط الجانبي يكون باللون الأساسي المضيء: ${color}.
+- داخل الشريط الجانبي ضع أيقونة ملف أو مستند واضحة في الأعلى، وتحتها النص التالي فقط:
+منتج
+رقمي
+- اجعل أيقونة الملف ونص "منتج رقمي" باللون الأبيض، بنفس الحجم والترتيب والمحاذاة في جميع الأقسام.
+- أعلى التصميم في المنتصف ضع شعاراً موحداً وثابتاً للعلامة، ولا تغيّر طريقة كتابته أو رمزه أو خطه بين الأقسام.
+- اعتمد شعار إثراؤك كأصل بصري موحّد: أيقونة لمبة أفكار خطية بسيطة بجانب كلمة "إثراؤك" بالعربية، وتحتها كلمة "ithraok" بالإنجليزية.
+- اجعل لون اللمبة وكلمة "إثراؤك" و "ithraok" متناسقاً مع لون القسم الأساسي ${color}، وهو نفس لون شريط "منتج رقمي" والإطار الخارجي.
+- إذا كان اللون الأساسي فاتحاً جداً ويضعف وضوح الشعار، استخدم اللون الداعم الداكن ${support} للشعار مع الحفاظ على نفس روح لون القسم.
+- تعامل مع شعار إثراؤك كأنه ملف شعار ثابت أو ختم بصري جاهز، ولا تعيد تصميمه بخط مختلف من قسم لآخر.
+- إذا كانت صورة شعار إثراؤك المرجعية مرفقة ضمن الصور، فاستخدمها كمرجع بصري مباشر للشعار العلوي، وقلّد ترتيبها وخطها ونسبها، ولا تخترع شعاراً جديداً.
+- استخدم لكلمة "إثراؤك" خطاً عربياً هندسياً واضحاً وثابتاً وقريباً جداً من الهوية الأصلية، بوزن عريض ثابت، ولا تغيّر حجم الخط أو سماكته بين الأقسام.
+- اجعل كلمة "ithraok" أوضح قليلاً من المعتاد: حجم أكبر قليلاً، تباعد حروف معتدل، ولون متوافق مع الشعار، ولا تجعلها صغيرة جداً أو باهتة.
+- اعتمد رمز شعار إثراؤك دائماً: أيقونة لمبة أفكار خطية بسيطة كما في الشعار الأخضر المرجعي، وليست أباجورة، وليست مصباح طاولة، وليست أيقونة مختلفة.
+- اللمبة تكون خطية ونظيفة وبداخلها خطوط فتيلة بسيطة فقط؛ لا تضف وجهاً أو عينين أو فماً أو دوائر داخلية أو رموزاً إضافية داخل اللمبة.
+- يجب أن يبقى رمز اللمبة ثابت الشكل في جميع الأقسام، ولا يتغير إلا اللون حسب لون القسم.
+- لا تشوّه كلمة "إثراؤك"، ولا تفصل حروفها، ولا تغيّر تهجئة "ithraok".
+- تحت الشعار مباشرة، وفي منتصف التصميم، ضع اسم القسم داخل إطار زخرفي موحّد الشكل والحجم في جميع الأقسام.
+- إطار اسم القسم يجب أن يكون مثل النموذج المرجعي تماماً: كبسولة أفقية قصيرة، بزوايا دائرية، خط إطار رفيع مزدوج أو شبه مزدوج، زخارف صغيرة ثابتة على الطرفين، وخط أفقي رفيع ممتد يميناً ويساراً.
+- اجعل إطار اسم القسم بعرض ثابت تقريباً 34% إلى 42% من عرض التصميم، وارتفاع ثابت تقريباً 4% إلى 5.5% من ارتفاع التصميم، ولا تغيّر المقاس من قسم لآخر.
+- لا تجعل إطار اسم القسم كبيراً أو عريضاً أو ممتداً أكثر من اللازم؛ يجب أن يبقى أنيقاً وصغيراً مثل شريط عنوان فرعي.
+- لا تغيّر شكل إطار اسم القسم ولا زخرفته ولا سماكة حدوده من قسم لآخر؛ غيّر اللون فقط حسب لون القسم الأساسي ${color} مع لمسة من اللون الداعم ${support}.
+- النص داخل إطار القسم يكون في المنتصف تماماً أفقياً وعمودياً، مع مسافة داخلية مريحة حول النص.
+- خط اسم القسم داخل الإطار ثابت في جميع الأقسام: Tajawal ExtraBold تحديداً، أو أقرب خط عربي هندسي عريض له إذا لم يتوفر، ولا تستخدم أي خط آخر.
+- وزن الخط ثابت ExtraBold، حروف ممتلئة وواضحة، بدون زخرفة، بدون ميلان، وبدون خط رفيع.
+- حجم خط اسم القسم ثابت ومتوسط، تقريباً 55% إلى 65% من ارتفاع الإطار، ولا يكبر ولا يصغر بين الأقسام.
+- إذا كان اسم القسم طويلاً، لا تغيّر الخط ولا تكبّر الإطار؛ خفّض تباعد الحروف قليلاً أو استخدم ضغطاً أفقياً خفيفاً جداً مع الحفاظ على سطر واحد واضح.
+- لون نص اسم القسم يكون من اللون الداعم الداكن ${support} عندما تكون خلفية الإطار فاتحة، أو أبيضاً فقط إذا كانت خلفية الإطار ممتلئة باللون الأساسي.
+- اكتب داخل إطار القسم:
+${name}
+- يجب أن يظهر اسم القسم تحت شعار إثراؤك في جميع الأقسام بدون استثناء.
+- يجب أن يظهر اسم القسم مرة واحدة فقط في كامل التصميم، ومكانه الوحيد هو الشريط العلوي تحت الشعار.
+- ضع الكتاب فوق قاعدة دائرية رخامية بيضاء فاخرة، بعروق ذهبية خفيفة وغير مزدحمة.
+- اجعل القاعدة الرخامية تحتوي على حافة ذهبية رفيعة ولمعة دافئة ناعمة أسفل الحافة، مثل إضاءة عرض منتج احترافية.
+- استخدم أرضية أو خلفية رخامية بيضاء باهتة جداً بتفاصيل خفيفة، بحيث تضيف فخامة دون أن تنافس الغلاف أو النصوص.
+- لا تجعل عروق الرخام كثيرة أو قوية؛ المطلوب رخام أبيض هادئ مع عروق ذهبية قليلة وإضاءة دافئة خفيفة.
+- اجعل منطقة الشعار واسم القسم نظيفة وهادئة، ولا تضع خلفها عروق رخام قوية أو زخارف مزاحمة.
+- أسفل التصميم ضع شريط مزايا ثابت وموحّد في جميع الأقسام، بخمس أيقونات بسيطة باللون الأساسي المضيء، مع إمكانية استخدام اللون الداعم الداكن للعناوين الصغيرة فقط.
+- لا تغيّر نصوص الشريط السفلي من قسم لآخر، واعتمد النصوص التالية كما هي:
+جودة موثوقة
+تحميل فوري
+متوافق مع الأجهزة
+روابط تفاعلية
+منظم وسهل
+- اجعل الشريط السفلي مرتباً أفقياً، مع فواصل رفيعة بين العناصر، وأيقونة مناسبة فوق كل عبارة.
+- اجعل الخلفية بيضاء وفاخرة وناعمة.
+- استخدم أسلوباً عصرياً متوافقاً مع هوية متجر إثراؤك.
+- اعتمد ألواناً فاتحة ومشرقة، وابتعد عن الألوان الداكنة والثقيلة.
+- استخدم لمسات تركوازية وسماوية وذهبية خفيفة بما يتوافق مع هوية المتجر.
+- لا تضف نصوصاً جديدة على الغلاف نفسه إلا إذا كانت موجودة داخل الصور المرفقة.
+- لا تضف أسماء أقسام أو عبارات إضافية غير مطلوبة على الكتاب أو الإطار.
+- التزم بهذه البنية النصية في كل الأقسام: الشعار الموحّد في الأعلى، اسم القسم تحته مرة واحدة فقط، شريط "منتج رقمي" في اليسار، وكعب الكتاب ضيق وبصري فقط بلا نص ولا رمز.
+- الإضاءة ناعمة، الظلال واقعية، والجودة عالية جداً.
+- نسبة التصميم عمودية مناسبة للمتجر ووسائل التواصل.
+- أخرج تصميماً واحداً نهائياً جاهزاً للاستخدام.`;
+    }
+
+    function renderSections() {
+      sectionList.innerHTML = "";
+      sections.forEach((item) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "section-btn";
+        button.innerHTML = `
+          <span class="swatch" style="background:linear-gradient(135deg, ${item.color} 0 50%, ${item.support} 50% 100%)"></span>
+          <span>${item.name}</span>
+          <span class="code">${item.color} / ${item.support}</span>
+        `;
+        button.addEventListener("click", () => {
+          sectionName.value = item.name;
+          sectionColor.value = item.color;
+          supportColor.value = item.support;
+          saveAndUpdate();
+        });
+        sectionList.appendChild(button);
+      });
+    }
+
+    function updateActiveSection() {
+      [...sectionList.children].forEach((button, index) => {
+        const item = sections[index];
+        const active = item.name === sectionName.value.trim()
+          && item.color.toLowerCase() === sectionColor.value.trim().toLowerCase()
+          && item.support.toLowerCase() === supportColor.value.trim().toLowerCase();
+        button.classList.toggle("active", active);
+      });
+    }
+
+    function updateTheme(color) {
+      if (/^#[0-9a-fA-F]{6}$/.test(color)) {
+        document.documentElement.style.setProperty("--primary", color);
+        document.documentElement.style.setProperty("--primary-dark", color);
+      }
+    }
+
+    function updateHealth(warnings) {
+      if (!warnings.length) {
+        promptHealth.className = "health good";
+        promptHealth.textContent = "الإعدادات مكتملة، والبرومبت جاهز للنسخ والاستخدام.";
+        return;
+      }
+      promptHealth.className = "health warn";
+      promptHealth.textContent = warnings.join(" ");
+    }
+
+    function updateStats(text) {
+      $("charCount").textContent = text.length.toLocaleString("ar-SA");
+      $("wordCount").textContent = (text.match(/\S+/g) || []).length.toLocaleString("ar-SA");
+    }
+
+    function update() {
+      const color = normalizeColor(sectionColor.value) || "#16C8C8";
+      const support = normalizeColor(supportColor.value) || "#006F73";
+      const prompt = buildPrompt();
+      const warnings = validateInputs(false);
+      promptOutput.value = prompt;
+      previewName.textContent = sectionName.value.trim() || "غير محدد";
+      previewColor.textContent = color;
+      previewSupportColor.textContent = support;
+      updateTheme(color);
+      updateActiveSection();
+      updateStats(prompt);
+      updateHealth(warnings);
+    }
+
+    async function copyPrompt() {
+      validateInputs(true);
+      const text = promptOutput.value.trim();
+      if (!text) {
+        showToast("لا يوجد برومبت لنسخه", true);
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("تم نسخ البرومبت بنجاح.");
+      } catch (error) {
+        promptOutput.focus();
+        promptOutput.select();
+        const copied = document.execCommand("copy");
+        showToast(copied ? "تم نسخ البرومبت." : "تعذر النسخ، انسخه يدوياً من مربع النص.", !copied);
+      }
+      status.textContent = "تم نسخ البرومبت. ارفق الصور في أداة التصميم ثم الصقه.";
+      window.setTimeout(() => status.textContent = "ارفع الصور في أداة التصميم، ثم الصق البرومبت الناتج.", 2600);
+    }
+
+    function downloadPrompt() {
+      validateInputs(true);
+      const text = promptOutput.value.trim();
+      if (!text) {
+        showToast("لا يوجد برومبت لتحميله", true);
+        return;
+      }
+      const safeName = (sectionName.value.trim() || "prompt").replace(/[\\/:*?"<>|]+/g, "_");
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `برومبت_قالب_كتاب_${safeName}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      showToast("تم تحميل البرومبت كملف TXT.");
+    }
+
+    function resetForm() {
+      sectionName.value = sections[0].name;
+      sectionColor.value = sections[0].color;
+      supportColor.value = sections[0].support;
+      imageMode.value = "auto";
+      qualityLevel.value = "balanced";
+      extraNotes.value = "";
+      localStorage.removeItem(STORE_KEY);
+      update();
+      showToast("تمت إعادة الإعدادات الافتراضية.");
+    }
+
+    function showToast(message, isError = false) {
+      const toast = $("toast");
+      toast.textContent = message;
+      toast.classList.toggle("error", Boolean(isError));
+      toast.classList.add("show");
+      window.clearTimeout(toast.timer);
+      toast.timer = window.setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
+    window.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
